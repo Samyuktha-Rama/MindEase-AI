@@ -9,7 +9,6 @@ import os
 
 # --- Configuration & Setup ---
 try:
-    # os.getenv is used here, so 'import os' is necessary
     API_KEY = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
     if not API_KEY:
         st.error("GEMINI_API_KEY not found in Streamlit secrets or environment variables. Please check your setup.")
@@ -59,7 +58,7 @@ def initialize_chat_session(persona="Gently Supportive"):
     config = types.GenerateContentConfig(system_instruction=dynamic_instruction)
     
     st.session_state.chat = client.chats.create(model=MODEL, config=config)
-    # The message history is *only* cleared here if we re-initialize for a persona change
+    
     if not st.session_state.get('messages'):
         st.session_state.messages = []
 
@@ -81,7 +80,6 @@ st.set_page_config(
 st.session_state.ai_persona = "Gently Supportive" 
 manage_chat_session_state() # <--- CALL THE MANAGER HERE
     
-# CRITICAL CHANGE: Initialize journal_entries to an empty dict (no file loading)
 if "journal_entries" not in st.session_state:
     st.session_state.journal_entries = {}
     
@@ -299,9 +297,7 @@ def render_journal_tab():
                 
             st.session_state.journal_entries[today].append(entry_data)
             
-            # DELETED: 4. Save data to JSON file - data is now saved in session state automatically
-            
-            # 5. Reset text area and notify
+            # 4. Reset text area and notify
             # Ensure the key is unique for the next text area instance
             st.session_state.journal_entry_key = datetime.datetime.now().isoformat() + "_entry"
             st.success(f"Entry saved and analyzed! Sentiment: **{sentiment}**")
@@ -311,7 +307,6 @@ def render_journal_tab():
         st.rerun() 
 
     st.divider()
-    # Using st.subheader (which maps to h3) for a secondary title
     st.subheader("Journaling History")
 
     if not st.session_state.journal_entries:
@@ -362,7 +357,6 @@ def render_journal_tab():
 
 def render_insights_tab():
     """Renders the Emotional Insights interface, combining chat and journal data."""
-    # Using st.header (which maps to h2) for the main title of the tab content
     st.header("Advanced Emotional Tracking & Insights 📈")
     st.markdown("Visualizing your emotional journey from both your conversations and your reflections.")
     
@@ -374,8 +368,7 @@ def render_insights_tab():
         st.info("Start chatting and journaling to generate emotional data.")
         return
 
-    # Using st.subheader (which maps to h3) for section titles
-    st.subheader("💬 Reflective Space Emotion Frequency Breakdown") # Changed Chat to Reflective Space
+    st.subheader("💬 Reflective Space Emotion Frequency Breakdown") 
     if not emotions:
         st.info("No chat emotional data yet.")
     else:
@@ -395,7 +388,7 @@ def render_insights_tab():
     
     # --- 2. Journal Sentiment Analysis ---
     st.markdown("---")
-    st.subheader("📝 Journaling Sentiment Insights") # Using st.subheader (h3)
+    st.subheader("📝 Journaling Sentiment Insights")
 
     journal_sentiments = []
     for day_entries in st.session_state.journal_entries.values():
@@ -425,7 +418,7 @@ def render_insights_tab():
     # --- 3. Final Synthesis ---
     st.divider()
     
-    st.subheader("Key Synthesis") # Using st.subheader (h3)
+    st.subheader("Key Synthesis") 
     
     st.metric(label="Most Frequent Chat Emotion", value=most_frequent_chat_emotion if 'most_frequent_chat_emotion' in locals() else "None")
     st.metric(label="Most Frequent Journal Mood", value=most_frequent_journal_sentiment)

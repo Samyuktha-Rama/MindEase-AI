@@ -1,0 +1,15 @@
+# --- Core Dependencies ---
+streamlit>=1.37.0
+pandas>=2.2.0
+google-genai>=0.3.0
+
+# --- Optional Utilities ---
+python-dateutil>=2.8.2
+
+# --- For JSON handling (built-in, no need to install) ---
+# json (builtin)
+# collections (builtin)
+# datetime (builtin)
+# os (builtin)
+
+python-dotenv #when api key is saved in .env file

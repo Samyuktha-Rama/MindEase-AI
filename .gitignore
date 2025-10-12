@@ -1,0 +1,47 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.env
+.venv
+env/
+venv/
+ENV/
+*.log
+
+# --- Streamlit ---
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# --- VSCode / IDEs ---
+.vscode/
+.idea/
+*.swp
+
+# --- macOS / Windows ---
+.DS_Store
+Thumbs.db
+
+# --- Data Files ---
+*.json
+*.csv
+*.xlsx
+*.db
+*.sqlite3
+*.txt
+
+# --- Jupyter / Notebooks ---
+.ipynb_checkpoints/
+
+# --- PyInstaller ---
+build/
+dist/
+
+# --- Other ---
+logs/
+*.bak
+

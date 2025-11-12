@@ -31,13 +31,12 @@ Setup Instructions
    streamlit run app.py
 
 Folder Structure
-MindEaseAI/
-│
-├── app.py                  # Main Streamlit application file
-├── .env                    # Contains the GEMINI_API_KEY (excluded from Git)
-├── requirements.txt         # Python dependencies
-├── .gitignore               # Files and folders to exclude from version control
-├── README.md                # Project documentation
+
+├── app.py                  # Main Streamlit application file                 
+├── .env                    # Contains the GEMINI_API_KEY (excluded from Git)               
+├── requirements.txt         # Python dependencies      
+├── .gitignore               # Files and folders to exclude from version control        
+├── README.md                # Project documentation               
 └── mind_ease_data.json      # Journal data (auto-created, excluded from Git)
 
 Deployment (Optional - Streamlit Cloud)
@@ -53,3 +52,4 @@ Security Notes
 - The `.env` file must never be uploaded to GitHub.
 - The `mind_ease_data.json` file stores personal journaling data locally; it is excluded from GitHub for privacy.
 - This application is not a replacement for professional mental health services. In case of a crisis, users are advised to seek immediate professional help.
+
